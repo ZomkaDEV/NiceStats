@@ -55,6 +55,17 @@ struct Ring: View {
     }
 }
 
+struct StatBar: View {
+    let value: Double
+    var color: Color = .blue
+    var body: some View {
+        Capsule().fill(.quaternary).frame(height: 6)
+            .overlay(alignment: .leading) {
+                GeometryReader { g in Capsule().fill(color).frame(width: max(6, g.size.width * min(max(value, 0), 1))) }
+            }
+    }
+}
+
 struct BatteryShape: View {
     let percent: Int
     var body: some View {

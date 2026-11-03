@@ -15,6 +15,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var host: NSHostingView<PanelRoot>!
     private var outside: Any?
     private var page: Page?
+    private let state = PanelState()
     private var navigating = false
     private var scrollMonitor: Any?
     private var swipe = 0.0
@@ -28,18 +29,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         item.button?.action = #selector(click)
         item.button?.sendAction(on: [.leftMouseUp, .rightMouseUp])
 
-        host = NSHostingView(rootView: root())
         let blur = NSVisualEffectView()
         blur.material = .menu; blur.blendingMode = .behindWindow; blur.state = .active
         blur.maskImage = Self.roundedMask(radius: 20)
-        host.autoresizingMask = [.minYMargin]
-        blur.addSubview(host)
         panel.contentView = blur
         panel.isOpaque = false; panel.backgroundColor = .clear; panel.hasShadow = true
         panel.level = .statusBar; panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary]
 
         item.button?.imagePosition = .imageOnly
         sampler.onTick = { [weak self] in self?.refreshIcon() }
+        state.onEditing = { [weak self] in self?.sampler.paused = $0 }
         refreshIcon()
     }
 
@@ -76,7 +75,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         host.frame = NSRect(x: 0, y: panel.contentView!.bounds.height - s.height, width: s.width, height: s.height)
     }
 
-    private func root() -> PanelRoot { PanelRoot(sampler: sampler, page: page, onSelect: { [weak self] in self?.navigate($0) }, onSize: { [weak self] in self?.contentResized($0) }) }
+    private func root() -> PanelRoot { PanelRoot(sampler: sampler, state: state, page: page, onSelect: { [weak self] in self?.navigate($0) }, onSize: { [weak self] in self?.contentResized($0) }) }
 
     private static func roundedMask(radius r: CGFloat) -> NSImage {
         let img = NSImage(size: NSSize(width: r * 2 + 1, height: r * 2 + 1), flipped: false) { rect in
@@ -97,9 +96,33 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @objc private func click() {
         if NSApp.currentEvent?.type == .rightMouseUp {
             let m = NSMenu()
+            m.addItem(withTitle: String(localized: "Edit layout"), action: #selector(startEditing), keyEquivalent: "").target = self
+            m.addItem(withTitle: String(localized: "Reset layout"), action: #selector(resetLayout), keyEquivalent: "").target = self
+            let pin = NSMenuItem(title: String(localized: "Pin panel"), action: #selector(togglePin), keyEquivalent: "")
+            pin.target = self; pin.state = state.pinned ? .on : .off
+            m.addItem(pin)
+            m.addItem(.separator())
             m.addItem(withTitle: String(localized: "Quit"), action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
             item.menu = m; item.button?.performClick(nil); item.menu = nil
         } else if panel.isVisible { hide() } else { show() }
+    }
+
+    @objc private func resetLayout() {
+        let a = NSAlert()
+        a.messageText = String(localized: "Reset layout?")
+        a.informativeText = String(localized: "This puts every stat back to its default style and position.")
+        a.addButton(withTitle: String(localized: "Reset"))
+        a.addButton(withTitle: String(localized: "Cancel"))
+        a.buttons[0].hasDestructiveAction = true
+        NSApp.activate()
+        if a.runModal() == .alertFirstButtonReturn { UserDefaults.standard.removeObject(forKey: StatLayout.key) }
+    }
+
+    @objc private func togglePin() { state.pinned.toggle() }
+
+    @objc private func startEditing() {
+        if panel.isVisible { navigate(nil) } else { show() }
+        state.editing = true
     }
 
     private func frame(for size: CGSize) -> NSRect {
@@ -112,24 +135,30 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func show() {
         cancelAnimation()
         sampler.visible = true; sampler.refreshPanel()
-        page = nil; host.rootView = root()
+        page = nil
+        host = NSHostingView(rootView: root())
+        host.autoresizingMask = [.minYMargin]
+        panel.contentView?.addSubview(host)
         panel.setFrame(frame(for: host.fittingSize), display: false)
         fit()
         host.alphaValue = 1
         panel.makeKeyAndOrderFront(nil)
         scrollMonitor = NSEvent.addLocalMonitorForEvents(matching: .scrollWheel) { [weak self] e in self?.scroll(e); return e }
         outside = NSEvent.addGlobalMonitorForEvents(matching: [.leftMouseDown, .rightMouseDown]) { [weak self] _ in
+            if self?.state.pinned == true || self?.state.editing == true { return }
             if let w = self?.item.button?.window, w.frame.contains(NSEvent.mouseLocation) { return }
             self?.hide()
         }
     }
 
     private func hide() {
+        state.editing = false
         if let o = outside { NSEvent.removeMonitor(o); outside = nil }
         if let m = scrollMonitor { NSEvent.removeMonitor(m); scrollMonitor = nil }
         cancelAnimation()
         sampler.visible = false
         panel.orderOut(nil)
+        host?.removeFromSuperview(); host = nil
     }
 
     private func cancelAnimation() {
