@@ -29,9 +29,13 @@ struct Snapshot {
     var cpuTemp = 0.0, gpuTemp = 0.0
     var ramUsed = 0.0, ramTotal = 1.0, swap = 0.0, pressure = String(localized: "Normal")
     var up = 0.0, down = 0.0, localIP = notAvailable
+    var volumes: [Volume] = []
+    var drives: [String: DriveInfo] = [:]
     var link = notAvailable
     var upHist: [Double] = [], downHist: [Double] = []
     var ramPct: Double { ramUsed / ramTotal }
+    /// nil path is the startup volume.
+    func volume(_ path: String?) -> Volume? { volumes.first { $0.path == (path ?? "/") } }
 }
 
 private func sysctlInt(_ name: String) -> Int {
@@ -108,6 +112,24 @@ func readRAM() -> (used: Double, total: Double, swap: Double, pressure: String) 
         + Double(s.wire_count) + Double(s.compressor_page_count) - Double(s.purgeable_count) - Double(s.external_page_count)
     return (ok == KERN_SUCCESS ? pages * Double(getpagesize()) : 0, total, Double(sw.xsu_used),
             pr >= 4 ? String(localized: "Critical") : pr >= 2 ? String(localized: "Warning") : String(localized: "Normal"))
+}
+
+struct Volume: Identifiable {
+    var path: String, name: String
+    var used: Double, total: Double
+    var id: String { path }
+    var fraction: Double { total > 0 ? used / total : 0 }
+}
+
+func readVolumes() -> [Volume] {
+    let keys: [URLResourceKey] = [.volumeNameKey, .volumeTotalCapacityKey, .volumeAvailableCapacityKey, .volumeAvailableCapacityForImportantUsageKey, .volumeIsLocalKey]
+    let urls = FileManager.default.mountedVolumeURLs(includingResourceValuesForKeys: keys, options: [.skipHiddenVolumes]) ?? []
+    let all: [Volume] = urls.compactMap { u in
+        guard let v = try? u.resourceValues(forKeys: Set(keys)), v.volumeIsLocal == true, let total = v.volumeTotalCapacity, total > 0 else { return nil }
+        let free = v.volumeAvailableCapacityForImportantUsage.map(Double.init) ?? Double(v.volumeAvailableCapacity ?? 0)
+        return Volume(path: u.path, name: v.volumeName ?? u.lastPathComponent, used: Double(total) - free, total: Double(total))
+    }
+    return all.filter { $0.path == "/" } + all.filter { $0.path != "/" }
 }
 
 struct GPUInfo {
