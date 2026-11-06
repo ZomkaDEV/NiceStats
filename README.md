@@ -26,6 +26,6 @@ Huge thanks to the following people for helping me with translating the app:
 | German, Russian | [ZomkaDEV](https://github.com/ZomkaDEV/) |
 | Spanish (Latin American) | [etonedemid](https://github.com/etonedemid/), [Snekolotl](https://guns.lol/snekolotl) |
 | Korean | [Helloyunho](https://github.com/Helloyunho) |
-| French | MrLeRien |
+| French | MrLeRien, [Maelstrom](https://maelstrom.dev) |
 | Italian | [chic\_luke](https://t.me/chic_luke) |
 | Portuguese | [ChrisCoy](https://github.com/ChrisCoy) |

@@ -321,6 +321,12 @@
             "value" : "Juntar otra unidad"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter un autre disque"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -361,6 +367,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Juntar separador"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter un séparateur"
           }
         },
         "ko" : {
@@ -405,6 +417,12 @@
             "value" : "Juntar separador debajo"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajouter un séparateur en dessous"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -445,6 +463,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Barra"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barre"
           }
         },
         "ko" : {
@@ -539,6 +563,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler"
           }
         },
         "ko" : {
@@ -947,6 +977,12 @@
             "value" : "Datos escritos"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Données écrites"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1093,6 +1129,12 @@
             "value" : "Listo"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminer"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1187,6 +1229,12 @@
             "value" : "Arrastra para reordenar. Haz clic derecho en un mosaico para ver las opciones."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Faites glisser pour réorganiser. Faites un clic droit sur une tuile pour afficher les options."
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1229,6 +1277,12 @@
             "value" : "Unidad"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disque"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1269,6 +1323,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Editar diseño"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifier la disposition"
           }
         },
         "ko" : {
@@ -1363,6 +1423,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Externa"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Externe"
           }
         },
         "ko" : {
@@ -1511,6 +1577,12 @@
             "value" : "Gráfica"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Graphique"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1551,6 +1623,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Salud"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "État"
           }
         },
         "ko" : {
@@ -1595,6 +1673,12 @@
             "value" : "Escondido"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masqués"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1637,6 +1721,12 @@
             "value" : "Escondir"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masquer"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1677,6 +1767,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Interna"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interne"
           }
         },
         "ko" : {
@@ -2033,6 +2129,12 @@
             "value" : "Requiere atención"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Requis d'attention"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2387,6 +2489,12 @@
             "value" : "Fijar panel"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Épingler le panneau"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2687,6 +2795,12 @@
             "value" : "Quitar"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2727,6 +2841,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Quitar separador"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retirer le séparateur"
           }
         },
         "ko" : {
@@ -2823,6 +2943,12 @@
             "value" : "Restablecer"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réinitialiser"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2863,6 +2989,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Restablecer diseño"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réinitialiser la disposition"
           }
         },
         "ko" : {
@@ -2907,6 +3039,12 @@
             "value" : "¿Restablecer el diseño?"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réinitialiser la disposition ?"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2947,6 +3085,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Anillo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anneau"
           }
         },
         "ko" : {
@@ -2991,6 +3135,12 @@
             "value" : "Disco"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stockage"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3031,6 +3181,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estilo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Style"
           }
         },
         "ko" : {
@@ -3177,6 +3333,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Todos los elementos volverán a su estilo y posición predeterminados."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tous les éléments reprendront leur style et leur position par défaut."
           }
         },
         "ko" : {
@@ -3479,6 +3641,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tipo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type"
           }
         },
         "ko" : {
